@@ -66,6 +66,11 @@
         .form-container button:hover {
             background-color: #0056b3;
         }
+    
+            .error {
+                color: red;
+                font-size: 12px;
+            }
        
         
       
@@ -76,18 +81,43 @@
         <!-- Login Form -->
         <div class="form-container">
             <h2>Login</h2>
-            <form id="loginForm">
+            <form id="loginForm" onsubmit="return validateForm()">
                 <div class="input-group">
                     <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required>
+                    
                 </div>
                 <div class="input-group">
                     <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required>
+                    <input type="password" id="password" name="loginPassword" placeholder="Enter your password" required>
+                    <div id="passwordError" class="error"></div><br><br>
                 </div>
                 <button type="submit" class="btn">Login</button>
-                <p>Don't have an account? <a href="http://127.0.0.1:3000/index1.html">Sign up here</a></p>
+                <p>Don't have an account? <a href ="signin.html">Sign up here</a></p>
             </form>
+            <script>
+                function validateForm() {
+                    // Clear previous error messages
+                    document.getElementById("passwordError").innerHTML = "";
+        
+                    // Get form values
+                    const password = document.getElementById("password").value;
+        
+                    let isValid = true;
+        
+        
+                    // Validate Password (must contain at least one uppercase letter, one number, and be at least 8 characters)
+                    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/\\|`~\-]).{8,}$/;
+
+                    if (!passwordRegex.test(password)) {
+                        document.getElementById("passwordError").innerHTML = "Password must be at least 8 characters long, with at least one uppercase letter ,one special case letter and one number.";
+                        isValid = false;
+                    }
+        
+                    // If any validation fails, return false to prevent form submission
+                    return isValid;
+                }
+            </script>
         </div>
 
         <!-- style="background-image: url();background-repeat: no-repeat;background-size: cover;background-position: center;margin: 0;padding: 0;height: 100vh;"-->
@@ -95,3 +125,5 @@
     </div> 
 </body>
 </html>
+
+
