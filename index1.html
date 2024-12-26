@@ -66,15 +66,22 @@
       .form-container button:hover {
           background-color:#f1f8;
       }
-     
-      
+      .error {
+        color: red;
+        font-size: 12px;
+    }
+    .form-container{
+        background-color: rgba(80, 28, 213, 0.9);
+    }
+
     
-  </style>
+</style>
 </head>
-<body>
+<body background-image="">
+
     <div class="form-container" id="signupForm">
         <h2>Signup</h2>
-        <form>
+        <form onsubmit="return validateForm()">
             <div class="input-group">
                 <label for="signupName">Name</label>
                 <input type="text" id="signupName" name="signupName" placeholder="Enter your name" required>
@@ -85,15 +92,64 @@
             </div>
             <div class="input-group">
                 <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" name="signupPassword" placeholder="Create a password" required>
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
             </div>
             <div class="input-group">
                 <label for="signupConfirmPassword">Confirm Password</label>
-                <input type="password" id="signupConfirmPassword" name="signupConfirmPassword" placeholder="Confirm your password" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
             </div>
             <button type="submit" class="btn">Signup</button>
-            <p>Already have an account? <a href="http://127.0.0.1:3000/index.html#index1.html">Login here</a></p>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
         </form>
     </div>
+
+    <script>
+        // Real-time Password and Confirm Password Validation
+        document.getElementById("password").addEventListener("input", validatePasswordMatch);
+        document.getElementById("confirmPassword").addEventListener("input", validatePasswordMatch);
+
+        function validatePasswordMatch() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                // You can also highlight the input field if you want
+                document.getElementById("confirmPassword").style.borderColor = "red"; // Optional: Highlight the input field
+            } else {
+                document.getElementById("confirmPassword").style.borderColor = ""; // Reset the border
+            }
+        }
+
+        // Form validation on submit
+        function validateForm() {
+            // Get form values
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            let isValid = true;
+
+            // Validate Password (must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"'<>,.?/\\|`~\-]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert("Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character.");
+                isValid = false;
+            }
+
+            // Ensure passwords match before submitting the form
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                isValid = false;
+            }
+            else{
+                alert("Passwords  matched.");
+                isvalid= true;
+            }
+
+            // If any validation fails, return false to prevent form submission
+            return isValid;
+        }
+    </script>
 </body>
 </html>
+
