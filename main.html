@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://source.unsplash.com/1600x900/?books,nature') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+        p1:hover{
+            color:red;
+            border:2px solid red;
+        }
+        header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            position: relative;
+        }
+        .header-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .header-buttons button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .header-buttons button:hover {
+            background-color: white;
+            color: black;
+        }
+        .search-container {
+            margin: 50px auto;
+            text-align: center;
+        }
+        .search-container input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-container button {
+            padding: 18px 18px;
+            font-size: 16px;
+            color: white;
+            background-color: #111311;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 50px auto;
+            flex-wrap: wrap;
+        }
+        .feature-card {
+            background-color: rgba(243, 231, 13, 0.478);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .feature-card a {
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .feature-card a[href*='wordOfDay'] {
+            color: #4CAF50;
+        }
+        .feature-card a[href*='wordOfDay']:hover {
+            color: #FF5722;
+        }
+        .feature-card a[href*='trendingWords'] {
+            color: #2196F3;
+        }
+        .feature-card a[href*='trendingWords']:hover {
+            color: #FF9800;
+        }
+        .feature-card a[href*='grammarTips'] {
+            color: #9C27B0;
+        }
+
+        .feature-card a[href*='grammarTips']:hover {
+            color: #00BCD4;
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+        }
+        .game-section {
+            text-align: center;
+            background-color: rgba(203, 13, 149, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto ;
+        
+        }
+        #feedback {margin-top: 10px;color: green;font-weight: bold;}
+        .letter-gap {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function displayMessage(field) {
+            const messages = {
+                wordOfDay: "Today's word is 'Serendipity': the occurrence of events by chance in a happy or beneficial way.",
+                trendingWords: "Trending word: 'Metaverse'. It's all about virtual shared spaces!",
+                grammarTips: "Grammar Tip: Always use 'its' for possession and 'it's' for 'it is'."
+            };
+            alert(messages[field]);
+        }
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img  src="header.png" width="150px"height="100px"  style="position: absolute;top:15px;left:35px;">
+        <h1>Welcome To My Dictionary</h1>
+        <p1>Your Trusted Companion For Discovering The Meanings Of English Words</p1>
+        <div class="header-buttons">
+            <button onclick="redirectTo('login.html')">Login</button>
+            <button onclick="redirectTo('signin.html')">Sign Up</button>
+        </div>
+    </header>
+    <div class="search-container">
+        <input type="text" placeholder="Search for a word...">
+        <button id="btn">Search</button>
+    </div>
+    <div class="features">
+        <div class="feature-card">
+            <a href="#" onclick="displayMessage('wordOfDay')">Word of the Day</a>
+            <p>Expand your vocabulary with daily highlights.</p>
+        </div>
+        <div class="feature-card">
+            <a href="#" onclick="displayMessage('trendingWords')">Trending Words</a>
+            <p>Discover what's popular in the language today.</p>
+        </div>
+        <div class="feature-card">
+            <a href="#" onclick="displayMessage('grammarTips')">Grammar Tips</a>
+            <p>Learn how to improve your writing and speaking.</p>
+        </div>
+        <div class="feature-card">
+            <a href="#" onclick="displayMessage('englishFacts')"> Facts about English </a>
+            <p>know about english</p>
+        </div>
+    </div>
+    <div class="game-section">
+        <h3 style="color:darkblue">Guess the Word Game</h3>
+        <p id="word-display"><strong>Word:</strong></p>
+        <p id="hint-display" style="color:rgb(11, 12, 11) "><em>Hint:</em> Click 'Next Word' to start!</p>
+        <div id="feedback"></div>
+        <button id="reveal-answer">Reveal Answer</button>
+        <button id="next-word">Next Word</button>
+    </div>  
+    <script>
+        function displayMessage(field) {
+            const messages = {
+                wordOfDay: "Today's word is 'Serendipity': the occurrence of events by chance in a happy or beneficial way.",
+                trendingWords: "Trending word: 'Metaverse'. It's all about virtual shared spaces!",
+                grammarTips: "Grammar Tip: Always use 'its' for possession and 'it's' for 'it is'.",
+                englishFacts: getRandomEnglishFact()
+            };
+            alert(messages[field]);
+        }
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+        // Random English facts
+        function getRandomEnglishFact() {
+            const facts = [
+                "The most common letter in English is 'E'.",
+                "Shakespeare added over 1,700 words to the English language.",
+                "'I am.' is the shortest complete sentence in English.",
+                "The word 'set' has the most definitions of any word in the English language.",
+                "The longest word in English is 'pneumonoultramicroscopicsilicovolcanoconiosis'.",
+                "The dot over the letters 'i' and 'j' is called a 'tittle'.",
+                "The English alphabet originally had 29 letters, including the now obsolete letters 'thorn' (þ) and 'eth' (ð).",
+                "English is the language with the most words, estimated at over 1 million.",
+                "'Dreamt' is the only word in English that ends with 'mt'.",
+                "English borrows words from over 350 languages worldwide."
+            ];
+            // Generate a random fact
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            return facts[randomIndex];
+        }
+    </script>  
+    <script>
+        // Array of words with hints
+        const words = [
+            { word: "University", hint: "A place of learning" },
+            { word: "Grammar", hint: "Rules of a language" },
+            { word: "Progress", hint: "To improve or get better" },
+            { word: "Serendipity", hint: "A positive discovery by chance" },
+            { word: "Metaverse", hint: "A virtual shared space" },
+            { word: "Philosophy", hint: "The study of fundamental nature of knowledge" },
+            { word: "Astronomy", hint: "The study of celestial bodies" },
+            { word: "Technology", hint: "The application of scientific knowledge for practical purposes" },
+            { word: "Mathematics", hint: "The abstract science of number, quantity, and space" },
+            { word: "Literature", hint: "Written works, especially those considered of superior or lasting artistic merit" },
+            { word: "Ecosystem", hint: "A biological community of interacting organisms and their physical environment" },
+            { word: "Algorithm", hint: "A process or set of rules to be followed in calculations" },
+            { word: "Artificial", hint: "Made or produced by human beings rather than occurring naturally" },
+            { word: "Psychology", hint: "The scientific study of the human mind and its functions" },
+            { word: "Cognitive", hint: "Relating to cognition, the mental action or process of acquiring knowledge" },
+            { word: "Invention", hint: "The action of inventing something, typically a process or device" },
+            { word: "Innovation", hint: "The action or process of innovating, introducing new things" },
+            { word: "Medicine", hint: "The science or practice of the diagnosis, treatment, and prevention of disease" },
+            { word: "Pharmacology", hint: "The branch of medicine that focuses on drugs and their effects on the body" },
+            { word: "Economics", hint: "The branch of knowledge concerned with the production, consumption, and transfer of wealth" },
+            { word: "Chemistry", hint: "The branch of science that deals with the identification of substances" },
+            { word: "Biology", hint: "The science of life and living organisms" },
+            { word: "Quantum", hint: "A discrete quantity of energy proportional in magnitude to the frequency of the radiation it represents" },
+            { word: "Quantum", hint: "Physics related to the behavior of subatomic particles" },
+            { word: "Mathematics", hint: "Science involving numbers, shapes, and measurements" },
+            { word: "Statistics", hint: "The science of collecting, analyzing, and interpreting data" },
+            { word: "Geography", hint: "The study of physical features of the earth and its atmosphere" },
+            { word: "History", hint: "The study of past events" },
+            { word: "Renaissance", hint: "The revival of art and literature under the influence of classical models" },
+            { word: "Literature", hint: "The written works considered to have artistic merit" },
+            { word: "Astronomy", hint: "The scientific study of celestial bodies" },
+            { word: "Linguistics", hint: "The scientific study of language and its structure" },
+            { word: "Mythology", hint: "A collection of myths, especially one belonging to a particular religious or cultural tradition" },
+            { word: "Ethics", hint: "Moral principles that govern a person's behavior" },
+            { word: "Botany", hint: "The scientific study of plants" },
+            { word: "Zoology", hint: "The scientific study of animals" },
+            { word: "Meteorology", hint: "The study of weather and atmospheric conditions" },
+            { word: "Astronaut", hint: "A person trained for space travel" },
+            { word: "Geology", hint: "The science of the earth's physical structure and substances" },
+            { word: "Hydrology", hint: "The branch of science concerned with the properties and distribution of water" },
+            { word: "Pharmacology", hint: "The branch of medicine that studies drugs and their effects" },
+            { word: "Cryptography", hint: "The art of writing or solving codes" },
+            { word: "Anthropology", hint: "The study of human societies, cultures, and their development" },
+            { word: "Sociology", hint: "The study of society and social behavior" },
+            { word: "Architecture", hint: "The art or practice of designing and constructing buildings" },
+            { word: "Psychiatry", hint: "The study and treatment of mental illness" },
+            { word: "Neurology", hint: "The branch of medicine concerned with the nervous system" },
+            { word: "Theology", hint: "The study of the nature of God and religious belief" },
+            { word: "Botany", hint: "The study of plants" },
+            { word: "Cosmology", hint: "The science of the origin and development of the universe" },
+            { word: "Criminology", hint: "The scientific study of crime and criminals" },
+            { word: "Political", hint: "Relating to the government or public affairs of a country" },
+            { word: "Artistic", hint: "Relating to or characteristic of art" },
+            { word: "Legal", hint: "Relating to the law" }
+        ];
+        let currentWord = null;
+        let guessedWord = [];
+        // Function to get a random word
+        function getRandomWord() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            currentWord = words[randomIndex];
+            guessedWord = Array(currentWord.word.length).fill("_"); // Initialize with blanks
+            return currentWord;
+        }
+        // Function to display the word with clickable dashes
+        function displayWord() {
+            const { word, hint } = getRandomWord();
+            document.getElementById("hint-display").innerHTML = `<em>Hint:</em> ${hint}`;
+            const wordDisplay = guessedWord.map((letter, index) => {
+                return `<span class="letter-gap" onclick="handleLetterClick(${index})">${letter === "_" ? "_" : letter}</span>`;
+            }).join(" ");
+            document.getElementById("word-display").innerHTML = `<strong>Word:</strong> ${wordDisplay}`;
+            document.getElementById("feedback").innerText = "";
+        }
+        // Function to handle a click on a letter gap
+        function handleLetterClick(index) {
+            const letter = prompt("Enter a letter:").toLowerCase();
+            if (letter && letter.length === 1 && /^[a-zA-Z]$/.test(letter)) {
+                if (checkGuess(letter, index)) {
+                    guessedWord[index] = currentWord.word[index];
+                    updateDisplay();
+                    checkIfWordComplete();
+                } else {
+                    document.getElementById("feedback").innerText = "Wrong guess, try again!";
+                }
+            } else {
+                document.getElementById("feedback").innerText = "Please enter a valid letter!";
+            }
+        }
+        // Function to check the user's guess
+        function checkGuess(letter, index) {
+            return currentWord.word[index].toLowerCase() === letter;
+        }
+        // Function to update the word display
+        function updateDisplay() {
+            const wordDisplay = guessedWord.map((letter, index) => {
+                return `<span class="letter-gap" onclick="handleLetterClick(${index})">${letter === "_" ? "_" : letter}</span>`;
+            }).join(" ");
+            document.getElementById("word-display").innerHTML = `<strong>Word:</strong> ${wordDisplay}`;
+        }
+        // Function to check if the word is fully guessed
+        function checkIfWordComplete() {
+            if (!guessedWord.includes("_")) {
+                document.getElementById("feedback").innerText = "Congratulations! You guessed the word: " + currentWord.word;
+            }
+        }
+        // Event listeners
+        document.getElementById("next-word").addEventListener("click", displayWord);
+        document.getElementById("reveal-answer").addEventListener("click", () => {
+            if (currentWord) {
+                alert(`Answer: ${currentWord.word}`);
+            } else {
+                alert("Click 'Next Word' to start!");
+            }
+        });
+        // Initial load
+        displayWord();
+    </script>    
+ <footer>
+        <div class="quotes-section">
+            <p style="text-align: center;;color:rgb(32, 29, 212);font-family: 'Playfair Display', serif;font-family: 'Merriweather', serif;font-family: 'Baskerville', 'Georgia', serif;
+              ;">"Every day is a chance to learn something new. Make it count!"</p>
+        </div>
+        <p style="text-align: center; margin-top: 20px;color:black">© 2024 My Dictionary | Keep exploring the world of words!</p>
+    </footer> 
+    </script>
+</body>
+</html>
+
